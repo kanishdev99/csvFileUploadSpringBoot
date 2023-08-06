@@ -19,7 +19,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
-import com.csvupload.test.bean.DeveloperTutorials;
+import com.csvupload.test.bean.DeveloperTutorial;
 import com.csvupload.test.bean.ResponseMessage;
 import com.csvupload.test.service.CSVService;
 import com.csvupload.test.util.CSVHelper;
@@ -62,9 +62,9 @@ public class CSVController {
 	  }
 
 	  @GetMapping("/tutorials")
-	  public ResponseEntity<List<DeveloperTutorials>> getAllTutorials() {
+	  public ResponseEntity<List<DeveloperTutorial>> getAllTutorials() {
 	    try {
-	      List<DeveloperTutorials> tutorials = fileService.getAllTutorials();
+	      List<DeveloperTutorial> tutorials = fileService.getAllTutorials();
 
 	      if (tutorials.isEmpty()) {
 	        return new ResponseEntity<>(HttpStatus.NO_CONTENT);

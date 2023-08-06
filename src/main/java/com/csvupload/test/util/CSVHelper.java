@@ -18,7 +18,7 @@ import org.apache.commons.csv.CSVRecord;
 import org.apache.commons.csv.QuoteMode;
 import org.springframework.web.multipart.MultipartFile;
 
-import com.csvupload.test.bean.DeveloperTutorials;
+import com.csvupload.test.bean.DeveloperTutorial;
 
 public class CSVHelper {
 	public static String TYPE = "text/csv";
@@ -33,24 +33,24 @@ public class CSVHelper {
 	    return false;
 	  }
 
-	  public static List<DeveloperTutorials> csvToTutorials(InputStream is) {
+	  public static List<DeveloperTutorial> csvToTutorials(InputStream is) {
 	    try (BufferedReader fileReader = new BufferedReader(new InputStreamReader(is, "UTF-8"));
 	        CSVParser csvParser = new CSVParser(fileReader,
 	            CSVFormat.DEFAULT.withFirstRecordAsHeader().withIgnoreHeaderCase().withTrim());) {
 
-	      List<DeveloperTutorials> developerTutorialList = new ArrayList<>();
+	      List<DeveloperTutorial> developerTutorialList = new ArrayList<>();
 
 	      Iterable<CSVRecord> csvRecords = csvParser.getRecords();
 
 	      for (CSVRecord csvRecord : csvRecords) {
-	    	  DeveloperTutorials developerTutorials = new DeveloperTutorials(
+	    	  DeveloperTutorial developerTutorial = new DeveloperTutorial(
 	              Long.parseLong(csvRecord.get("Id")),
 	              csvRecord.get("Title"),
 	              csvRecord.get("Description"),
 	              Boolean.parseBoolean(csvRecord.get("Published"))
 	            );
 
-	    	  developerTutorialList.add(developerTutorials);
+	    	  developerTutorialList.add(developerTutorial);
 	      }
 
 	      return developerTutorialList;
@@ -59,17 +59,17 @@ public class CSVHelper {
 	    }
 	  }
 
-	  public static ByteArrayInputStream tutorialsToCSV(List<DeveloperTutorials> developerTutorialList) {
+	  public static ByteArrayInputStream tutorialsToCSV(List<DeveloperTutorial> developerTutorialList) {
 	    final CSVFormat format = CSVFormat.DEFAULT.withQuoteMode(QuoteMode.MINIMAL);
 
 	    try (ByteArrayOutputStream out = new ByteArrayOutputStream();
 	        CSVPrinter csvPrinter = new CSVPrinter(new PrintWriter(out), format);) {
-	      for (DeveloperTutorials developerTutorials : developerTutorialList) {
+	      for (DeveloperTutorial developerTutorial : developerTutorialList) {
 	        List<String> data = Arrays.asList(
-	              String.valueOf(developerTutorials.getId()),
-	              developerTutorials.getTitle(),
-	              developerTutorials.getDescription(),
-	              String.valueOf(developerTutorials.isPublished())
+	              String.valueOf(developerTutorial.getId()),
+	              developerTutorial.getTitle(),
+	              developerTutorial.getDescription(),
+	              String.valueOf(developerTutorial.isPublished())
 	            );
 
 	        csvPrinter.printRecord(data);

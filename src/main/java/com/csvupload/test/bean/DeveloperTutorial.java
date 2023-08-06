@@ -7,7 +7,7 @@ import jakarta.persistence.Table;
 
 @Entity
 @Table(name = "developer_tutorial")
-public class DeveloperTutorials {
+public class DeveloperTutorial {
 	 @Id
 	  @Column(name = "id")
 	  private long id;
@@ -21,11 +21,11 @@ public class DeveloperTutorials {
 	  @Column(name = "published")
 	  private boolean published;
 
-	  public DeveloperTutorials() {
+	  public DeveloperTutorial() {
 
 	  }
 
-	  public DeveloperTutorials(long id, String title, String  description, boolean published) {
+	  public DeveloperTutorial(long id, String title, String  description, boolean published) {
 	    this.id = id;
 	    this.title = title;
 	    this.description = description;
